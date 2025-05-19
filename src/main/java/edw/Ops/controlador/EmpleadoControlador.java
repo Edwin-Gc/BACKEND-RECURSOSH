@@ -1,3 +1,4 @@
+
 package edw.Ops.controlador;
 
 import edw.Ops.excepcion.RecursoNoEncontradoExcepcion;
@@ -14,75 +15,85 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/empleados")
-@CrossOrigin(origins = {
+//http://localhost:8080/rh-app/
+@RequestMapping("OpsApplication")
+
+
+
+@CrossOrigin(value = {
         "http://localhost:3000",
         "https://recursosh-frontend.onrender.com",
-        "https://abundant-energy-production.up.railway.app",
-        "https://mi-frontend.onrender.com"
+        "https://abundant-energy-production.up.railway.app/empleados",
+        "https://enchanting-manatee-70ef44.netlify.app/"
 })
+
+
+
+
+
+
 public class EmpleadoControlador {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmpleadoControlador.class);
+
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(EmpleadoControlador.class);
 
     @Autowired
     private IEmpleadoServicio empleadoServicio;
 
-    // GET /empleados
-    @GetMapping("")
-    public List<Empleado> obtenerEmpleados() {
-        List<Empleado> empleados = empleadoServicio.listarEmpleados();
-        empleados.forEach(empleado -> logger.info(empleado.toString()));
+    // http://localhost:8080/rh-app/empleados
+    @GetMapping("/empleados")
+    public List<Empleado> obtenerEmpleados(){
+        var empleados = empleadoServicio.listarEmpleados();
+        empleados.forEach((empleado -> logger.info(empleado.toString())));
         return empleados;
     }
 
-    // POST /empleados
-    @PostMapping("")
-    public Empleado agregarEmpleado(@RequestBody Empleado empleado) {
-        logger.info("Empleado a agregar: {}", empleado);
+    @PostMapping("/empleados")
+    public Empleado agregarEmpleado(@RequestBody Empleado empleado){
+        logger.info("Empleado a agregar: " + empleado);
         return empleadoServicio.guardarEmpleado(empleado);
     }
 
-    // GET /empleados/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity<Empleado> obtenerEmpleadoPorId(@PathVariable Integer id) {
+    @GetMapping("/empleados/{id}")
+    public ResponseEntity<Empleado>
+    obtenerEmpleadoPorId(@PathVariable Integer id){
         Empleado empleado = empleadoServicio.buscarEmpleadoPorId(id);
-        if (empleado == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontró el empleado con ID: " + id);
-        }
+        if(empleado == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
         return ResponseEntity.ok(empleado);
     }
 
-    // PUT /empleados/{id}
-    @PutMapping("/{id}")
-    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable Integer id, @RequestBody Empleado empleadoRecibido) {
+    @PutMapping("/empleados/{id}")
+    public ResponseEntity<Empleado>
+    actualizarEmpleado(@PathVariable Integer id,
+                       @RequestBody Empleado empleadoRecibido){
         Empleado empleado = empleadoServicio.buscarEmpleadoPorId(id);
-        if (empleado == null) {
-            throw new RecursoNoEncontradoExcepcion("El ID recibido no existe: " + id);
-        }
-
+        if (empleado == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         empleado.setNombre(empleadoRecibido.getNombre());
         empleado.setDepartamento(empleadoRecibido.getDepartamento());
-        empleado.setEmail(empleadoRecibido.getEmail());
-        empleado.setTelefono(empleadoRecibido.getTelefono());
-        empleado.setCiudad(empleadoRecibido.getCiudad());
-        empleado.setSalario(empleadoRecibido.getSalario());
-
-        Empleado actualizado = empleadoServicio.guardarEmpleado(empleado);
-        return ResponseEntity.ok(actualizado);
+        empleado.setSueldo(empleadoRecibido.getSueldo());
+        empleadoServicio.guardarEmpleado(empleado);
+        return ResponseEntity.ok(empleado);
     }
 
-    // DELETE /empleados/{id}
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Boolean>> eliminarEmpleado(@PathVariable Integer id) {
+    @DeleteMapping("/empleados/{id}")
+    public ResponseEntity<Map<String, Boolean>>
+    eliminarEmpleado(@PathVariable Integer id){
         Empleado empleado = empleadoServicio.buscarEmpleadoPorId(id);
-        if (empleado == null) {
-            throw new RecursoNoEncontradoExcepcion("El ID recibido no existe: " + id);
-        }
-
+        if(empleado == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         empleadoServicio.eliminarEmpleado(empleado);
+        // Json {"eliminado": "true"}
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+
+
 }
+
+
+
