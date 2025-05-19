@@ -21,8 +21,10 @@ import java.util.Map;
 
 @CrossOrigin(origins = {
         "http://localhost:3000",
-        "https://recursosh-frontend.onrender.com"
-})
+        "https://recursosh-frontend.onrender.com",
+        "https://abundant-energy-production.up.railway.app/empleados"
+
+        })
 
 
 public class EmpleadoControlador {
