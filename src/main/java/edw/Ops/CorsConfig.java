@@ -14,7 +14,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://recursosh-frontend.onrender.com")
+                        .allowedOrigins("https://recursosh-frontend.onrender.com", "https://abundant-energy-production.up.railway.app")
+
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS");
             }
         };
