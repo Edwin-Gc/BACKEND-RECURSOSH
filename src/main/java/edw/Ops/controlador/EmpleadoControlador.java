@@ -1,4 +1,3 @@
-
 package edw.Ops.controlador;
 
 import  edw.Ops.excepcion.RecursoNoEncontradoExcepcion;
@@ -16,8 +15,15 @@ import java.util.Map;
 
 @RestController
 //http://localhost:8080/OpsApplication/
-@RequestMapping("OpsApplication")
-@CrossOrigin(value = "http://localhost:3000")
+@RequestMapping("/empleados")
+
+
+@CrossOrigin(origins = {
+        "http://localhost:3000",
+        "https://recursosh-frontend.onrender.com"
+})
+
+
 public class EmpleadoControlador {
 
     private static final Logger logger =
