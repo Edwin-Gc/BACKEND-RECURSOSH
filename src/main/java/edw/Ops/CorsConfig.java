@@ -17,6 +17,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:3000",
+                                "https://enchanting-manatee-70ef44.netlify.app/",
                                 "https://recursosh-frontend.onrender.com",
                                 "https://abundant-energy-production.up.railway.app"
                         )

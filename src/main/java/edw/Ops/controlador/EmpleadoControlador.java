@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8080/rh-app/
+//https://abundant-energy-production.up.railway.app/empleados//
+//https://enchanting-manatee-70ef44.netlify.app//
+//https://recursosh-frontend.onrender.com//
 @RequestMapping("OpsApplication")
 
 
@@ -41,8 +43,14 @@ public class EmpleadoControlador {
 
     @Autowired
     private IEmpleadoServicio empleadoServicio;
+//https://abundant-energy-production.up.railway.app/empleados//
+//https://enchanting-manatee-70ef44.netlify.app//
+//https://recursosh-frontend.onrender.com//
 
-    // http://localhost:8080/rh-app/empleados
+
+
+
+
     @GetMapping("/empleados")
     public List<Empleado> obtenerEmpleados(){
         var empleados = empleadoServicio.listarEmpleados();
