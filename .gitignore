@@ -35,4 +35,4 @@ build/
 
 /src/main/resources/application.yml
 .env
-/src/main/resources/application.properties.local
+
