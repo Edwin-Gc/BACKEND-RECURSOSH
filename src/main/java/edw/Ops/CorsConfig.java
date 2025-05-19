@@ -1,5 +1,6 @@
 package edw.Ops;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,7 +15,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://recursosh-frontend.onrender.com")
+                        .allowedOrigins(
+                                "http://localhost:3000",
+                                "https://recursosh-frontend.onrender.com",
+                                "https://abundant-energy-production.up.railway.app"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
