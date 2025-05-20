@@ -1,3 +1,4 @@
+
 package edw.Ops;  // Ajusta esto a tu paquete
 
 import org.springframework.context.annotation.Bean;
@@ -14,11 +15,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
+                        .allowedOriginPatterns(
                                 "http://localhost:3000",
-                                "https://enchanting-manatee-70ef44.netlify.app",
-                                "https://recursosh-frontend.onrender.com",
-                                "https://abundant-energy-production.up.railway.app"
+                                "https://*.netlify.app",
+                                "https://*.onrender.com",
+                                "https://*.railway.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
