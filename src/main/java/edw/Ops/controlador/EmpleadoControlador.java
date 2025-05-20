@@ -18,7 +18,7 @@ import java.util.Map;
 //https://abundant-energy-production.up.railway.app/empleados//
 //https://enchanting-manatee-70ef44.netlify.app//
 //https://recursosh-frontend.onrender.com//
-@RequestMapping("OpsApplication")
+@RequestMapping("/empleados/{id}")
 
 
 
