@@ -21,5 +21,8 @@ public class Empleado {
     Integer idEmpleado;
     String nombre;
     String departamento;
-    Double sueldo;
+    String ciudad;
+    String telefono;
+    String email;
+    Double salario;
 }
