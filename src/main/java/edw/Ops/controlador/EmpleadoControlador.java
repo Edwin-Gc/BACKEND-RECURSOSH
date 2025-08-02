@@ -14,13 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//@RequestMapping("OpsApplication")//
+@RequestMapping("OpsApplication")
 @CrossOrigin(value = {
         "http://localhost:3000",
-        "https://abundant-energy-production.up.railway.app/empleados",
-        "https://recursosh-frontend.onrender.com",
-        "https://abundant-energy-production.up.railway.app",
-        "https://enchanting-manatee-70ef44.netlify.app"
+
 })
 public class EmpleadoControlador {
 

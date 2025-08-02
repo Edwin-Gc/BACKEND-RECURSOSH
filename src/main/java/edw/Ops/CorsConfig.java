@@ -16,6 +16,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOriginPatterns(
+                                "http://localhost:8080/OpsApplication/empleados",
                                 "http://localhost:3000",
                                 "https://*.netlify.app",
                                 "https://*.onrender.com",
