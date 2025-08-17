@@ -30,10 +30,6 @@ import java.util.Map;
 
 
 
-
-
-
-
     private static final Logger logger =
             LoggerFactory.getLogger(EmpleadoControlador.class);
 
