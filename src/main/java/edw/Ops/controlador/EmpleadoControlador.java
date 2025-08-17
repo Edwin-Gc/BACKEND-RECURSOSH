@@ -8,27 +8,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@RequestMapping("OpsApplication")
-
-
-    @RestController
-    @RequestMapping("/api")
-    @CrossOrigin(value = {
-            "http://localhost:3000",
-            "https://recursosh-frontend.onrender.com",
-            "https://frontendnetlify-rh.netlify.app"
-    })
-    public class EmpleadoControlador {
-
-
-
-
-
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(value = {
+        "http://localhost:3000",
+        "https://recursosh-frontend.onrender.com",
+        "https://frontendnetlify-rh.netlify.app"
+})
+public class EmpleadoControlador {
 
     private static final Logger logger =
             LoggerFactory.getLogger(EmpleadoControlador.class);
@@ -75,7 +68,6 @@ import java.util.Map;
         empleado.setEmail(empleadoRecibido.getEmail());
         empleado.setSalario(empleadoRecibido.getSalario());
 
-
         empleadoServicio.guardarEmpleado(empleado);
         return ResponseEntity.ok(empleado);
     }
@@ -91,5 +83,12 @@ import java.util.Map;
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
+    }
+
+    // NUEVO: Endpoint raíz para Heroku
+    @GetMapping("/")
+    public RedirectView redirectToApi() {
+        // Redirige la raíz al endpoint de empleados
+        return new RedirectView("/api/empleados");
     }
 }
