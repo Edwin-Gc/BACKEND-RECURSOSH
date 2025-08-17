@@ -1,3 +1,4 @@
+
 package edw.Ops.controlador;
 
 import edw.Ops.excepcion.RecursoNoEncontradoExcepcion;
@@ -8,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// Controlador principal de empleados
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(value = {
@@ -84,11 +85,21 @@ public class EmpleadoControlador {
         respuesta.put("eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+}
 
-    // NUEVO: Endpoint raíz para Heroku
+// ---------------------- CONTROLADOR ADICIONAL PARA HEROKU ----------------------
+@RestController
+class RaizControlador {
+
+    // GET / -> mensaje simple de que la API está funcionando
     @GetMapping("/")
-    public RedirectView redirectToApi() {
-        // Redirige la raíz al endpoint de empleados
-        return new RedirectView("/api/empleados");
+    public String raiz() {
+        return "API Recursos Humanos funcionando. Endpoint principal: /api/empleados";
+    }
+
+    // GET /error -> reemplaza el Whitelabel Error Page
+    @GetMapping("/error")
+    public String error() {
+        return "Error: recurso no encontrado. Usa /api/empleados para consultar la API.";
     }
 }
