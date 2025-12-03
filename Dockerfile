@@ -1,6 +1,7 @@
 # 1. Etapa de construcción (compila el proyecto con Maven)
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+#FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
+FROM docker.io/library/maven:3.9.6-eclipse-temurin-17 AS builder
 
 # Copiar pom.xml y descargar dependencias
 COPY pom.xml .
@@ -11,7 +12,9 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # 2. Etapa de ejecución (imagen estable con JDK completo, no Alpine)
-FROM eclipse-temurin:17-jdk-jammy
+#FROM eclipse-temurin:17-jdk-jammy
+FROM docker.io/library/eclipse-temurin:17-jdk-jammy
+
 WORKDIR /app
 
 # Instalar tzdata (opcional pero recomendable para DBs con timezone)
