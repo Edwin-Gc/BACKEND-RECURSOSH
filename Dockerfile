@@ -1,9 +1,24 @@
+# =========================
+# BUILD STAGE
+# =========================
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /app
+
+COPY pom.xml .
+RUN mvn -q -DskipTests dependency:resolve
+
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+
+# =========================
+# RUNTIME STAGE
+# =========================
 FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app
-COPY target/Ops-0.0.1-SNAPSHOT.jar app.jar
+
+COPY --from=build /app/target/Ops-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-ENV SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-ENV SPRING_DATASOURCE_USER=${SPRING_DATASOURCE_USER}
-ENV SPRING_DATASOURCE_PASS=${SPRING_DATASOURCE_PASS}
-ENV PORT=${PORT:-8080}
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
+
